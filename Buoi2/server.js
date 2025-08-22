@@ -4,7 +4,8 @@ import viewEngine from './config/viewEngine.js';
 import db from './config/config.json' assert { type: 'json' };
 import initWebRoutes from './routes/web.js';
 import connectDB from './config/configdb.js';
-require('dotenv').config();
+import dotenv from 'dotenv';
+dotenv.config();
 
 let app = express();
 
