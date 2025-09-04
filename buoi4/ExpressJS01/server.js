@@ -13,6 +13,7 @@ const PORT = process.env.PORT || 8888;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
+app.use('/v1/api', apiRoutes);
 configViewEngine(app);
 (async () => {
   try {
