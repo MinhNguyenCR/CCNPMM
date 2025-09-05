@@ -9,6 +9,7 @@ const RegisterPage = () => {
 
   const onFinish = async (values) => {
     const { username, email, password } = values
+    console.log('Success:', values);
     try {
       const res = await createUserApi(username, email, password)
       if (res) {
@@ -18,7 +19,7 @@ const RegisterPage = () => {
         notification.error({ message: 'CREATE USER', description: 'Error' })
       }
     } catch (e) {
-      notification.error({ message: 'CREATE USER', description: 'Error' })
+      notification.error({ message: 'CREATE USER', description: e.message })
     }
   }
   const onFinishFailed = () => {
