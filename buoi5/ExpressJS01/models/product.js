@@ -25,6 +25,10 @@ const productSchema = new mongoose.Schema({
     required: true,
     min: 0,
   },
+  isActive: {
+    type: Boolean,
+    default: true,
+  },
   reviews: [
     {
       user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
@@ -35,7 +39,7 @@ const productSchema = new mongoose.Schema({
   ],
 });
 productSchema.index({ category: 1, isActive: 1 });
-productSchema.index({ name: 'text', description: 'text' });
+productSchema.index({ name: "text", description: "text" });
 
 const Product = mongoose.model("Product", productSchema);
 module.exports = Product;

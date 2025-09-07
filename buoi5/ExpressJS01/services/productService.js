@@ -7,8 +7,8 @@ const getProductService = async (
   search = null
 ) => {
   try {
-    const query = { isActive: true };
-    if (category && categorty !== "All") {
+    const query = { };
+    if (category && category !== "All") {
       query.category = category;
     }
     if (search) {
