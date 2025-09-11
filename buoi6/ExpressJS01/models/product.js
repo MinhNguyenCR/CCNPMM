@@ -11,6 +11,10 @@ const productSchema = new mongoose.Schema({
     required: true,
     min: 0,
   },
+  image: {
+    type: String,
+    default: 'https://via.placeholder.com/300x300?text=No+Image'
+  },
   description: {
     type: String,
     trim: true,

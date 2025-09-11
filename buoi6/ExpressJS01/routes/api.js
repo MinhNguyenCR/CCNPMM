@@ -3,7 +3,7 @@ const { getUsers, createUser, handleLogin, getAccount } = require('../controller
 const router = express.Router();
 const { authMiddleware } = require('../middleware/auth');
 const delayMiddleware = require('../middleware/delay');
-const { getProducts, searchProduct } = require('../controllers/productController');
+const { getProducts, searchProduct, getCategories, getProductsByCategory } = require('../controllers/productController');
 
 router.post('/login', handleLogin);
 router.post('/register', createUser);
@@ -15,4 +15,6 @@ router.get('/account', delayMiddleware, getAccount);
 // router.get('/products/:id', getProductById);
 router.get('/products', getProducts)
 router.get('/products/search', searchProduct);
+router.get("/products/categories", getCategories);
+router.get("/products/categories/:catogory", getProductsByCategory);
 module.exports = router;

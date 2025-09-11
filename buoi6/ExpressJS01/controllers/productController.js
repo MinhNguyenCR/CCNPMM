@@ -1,6 +1,6 @@
 const {
   getProductService,
-  searchProductService,
+  searchProductService,getCategoryService
 } = require("../services/productService");
 
 // const getProductById = async (req, res) => {
@@ -39,4 +39,25 @@ const searchProduct = async (req, res) => {
   }
 };
 
-module.exports = { getProducts, searchProduct };
+const getCategories = async (req, res) => {
+  try {
+    const result = await getCategoryService();
+    res.status(200).json(result);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  } 
+};
+
+const getProductsByCategory = async (req, res) => {
+  try{
+    const {category} = req.params;
+    const {page = 1, limit =10} = req.query;
+
+    const result = await getProductService(page, limit, category)
+    return res.status(200).json(result);
+  }catch(error){
+    res.status(500).json({ message: error.message });
+  }
+}
+
+module.exports = { getProducts, searchProduct , getCategories, getProductsByCategory};

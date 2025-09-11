@@ -3,6 +3,7 @@ import ProductCard from "./ProductCard";
 import LoadingSpinner from "../common/LoadingSpinner";
 import "./ProductList.css";
 
+
 const ProductList = ({
   category = null,
   searchTerm = null,
@@ -18,6 +19,7 @@ const ProductList = ({
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState(category || "all");
   const [search, setSearch] = useState(searchTerm || "");
+  const [sortOrder, setSortOrder] = useState(null);
 
   // Fetch products
   const fetchProducts = useCallback(
@@ -36,6 +38,8 @@ const ProductList = ({
         });
 
         if (selectedCategory && selectedCategory !== "all") {
+          console.log("check", selectedCategory);
+
           params.append("category", selectedCategory);
         }
         let url = `http://localhost:8080/v1/api/products`;
@@ -43,6 +47,7 @@ const ProductList = ({
           params.append("q", search);
           url = `http://localhost:8080/v1/api/products/search?${params}`;
         } else url = `http://localhost:8080/v1/api/products?${params}`;
+        console.log('xxxxxx', url);
 
         const response = await fetch(url);
         console.log("Response status:", response);
@@ -97,19 +102,26 @@ const ProductList = ({
   // Handle category change
   const handleCategoryChange = (category) => {
     setSelectedCategory(category);
-    setCurrentPage(1);
-    setProducts([]);
-    fetchProducts(1, true);
   };
 
   // Handle search
-  const handleSearch = (searchTerm) => {
-    setSearch(searchTerm);
-    setCurrentPage(1);
-    setProducts([]);
-    fetchProducts(1, true);
+  const handleSearchEnter = (e) => {
+    if (e.key === "Enter") {
+      setCurrentPage(1);
+      setProducts([]);
+      fetchProducts(1, true);
+    }
   };
-
+  useEffect(() => {
+    if (sortOrder) {
+      const sortedProducts = [...products].sort((a, b) => {
+        if (sortOrder === "asc") return a.price - b.price;
+        if (sortOrder === "desc") return b.price - a.price;
+        return 0;
+      });
+      setProducts(sortedProducts);
+    }
+  }, [sortOrder]);
   // Infinite scroll
   useEffect(() => {
     const handleScroll = () => {
@@ -130,6 +142,11 @@ const ProductList = ({
     fetchProducts(1, true);
     fetchCategories();
   }, []);
+  useEffect(() => {
+    setCurrentPage(1);
+    setProducts([]);
+    fetchProducts(1, true);
+  }, [selectedCategory]);
 
   // Reset when category or search changes
   useEffect(() => {
@@ -167,16 +184,16 @@ const ProductList = ({
               type="text"
               placeholder="Tìm kiếm sản phẩm..."
               value={search}
-              onChange={(e) => handleSearch(e.target.value)}
+              onChange={(e) => setSearch(e.target.value)}
+              onKeyDown={handleSearchEnter}
               className="search-input"
             />
           </div>
 
           <div className="category-filters">
             <button
-              className={`category-btn ${
-                selectedCategory === "all" ? "active" : ""
-              }`}
+              className={`category-btn ${selectedCategory === "all" ? "active" : ""
+                }`}
               onClick={() => handleCategoryChange("all")}
             >
               Tất cả
@@ -184,16 +201,31 @@ const ProductList = ({
             {categories.map((cat) => (
               <button
                 key={cat}
-                className={`category-btn ${
-                  selectedCategory === cat ? "active" : ""
-                }`}
+                className={`category-btn ${selectedCategory === cat ? "active" : ""
+                  }`}
                 onClick={() => handleCategoryChange(cat)}
               >
                 {cat}
               </button>
             ))}
           </div>
+          <div className="sort-buttons">
+            <button
+              className={`sort-btn ${sortOrder === "asc" ? "active" : ""}`}
+              onClick={() => setSortOrder("asc")}
+            >
+              Giá: Thấp → Cao
+            </button>
+            <button
+              className={`sort-btn ${sortOrder === "desc" ? "active" : ""}`}
+              onClick={() => setSortOrder("desc")}
+            >
+              Giá: Cao → Thấp
+            </button>
+          </div>
+
         </div>
+
       )}
 
       <div className="product-grid">

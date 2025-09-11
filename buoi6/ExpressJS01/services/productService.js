@@ -1,5 +1,6 @@
 const Product = require("../models/product");
 const Fuse = require("fuse.js");
+
 const getProductService = async (
   page = 1,
   limit = 5,
@@ -79,4 +80,22 @@ const searchProductService = async (searchTerm, page = 1, limit = 10) => {
   }
 };
 
-module.exports = { getProductService, searchProductService };
+
+const getCategoryService = async () => {
+  try {
+    const categories = await Product.distinct("category");
+    return {
+      EC: 0,
+      EM: "Lấy danh sách danh mục thành công",
+      DT: categories,
+    };
+  } catch (error) {
+    return {
+      error: error.message,
+    }
+  }
+}
+
+
+
+module.exports = { getProductService, searchProductService, getCategoryService};
