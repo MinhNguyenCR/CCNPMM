@@ -37,31 +37,31 @@ const Header = () => {
     },
     ...(auth?.isAuthenticated
       ? [
-          {
-            label: `Welcome ${auth?.user?.email ?? ''}`,
-            key: 'submenu',
-            icon: <UsergroupAddOutlined />,
-            children: [
-              {
-                label: 'Logout',
-                key: 'logout',
-                icon: <LogoutOutlined />,
-              },
-            ],
-          },
-        ]
+        {
+          label: `Welcome ${auth?.user?.email ?? ''}`,
+          key: 'submenu',
+          icon: <UsergroupAddOutlined />,
+          children: [
+            {
+              label: 'Logout',
+              key: 'logout',
+              icon: <LogoutOutlined />,
+            },
+          ],
+        },
+      ]
       : [
-          {
-            label: <Link to={'/login'}>Đăng nhập</Link>,
-            key: 'login',
-            icon: <LoginOutlined />,
-          },
-          {
-            label: <Link to={'/register'}>Đăng ký</Link>,
-            key: 'register',
-            icon: <UsergroupAddOutlined />,
-          },
-        ]),
+        {
+          label: <Link to={'/login'}>Đăng nhập</Link>,
+          key: 'login',
+          icon: <LoginOutlined />,
+        },
+        {
+          label: <Link to={'/register'}>Đăng ký</Link>,
+          key: 'register',
+          icon: <UsergroupAddOutlined />,
+        },
+      ]),
   ]
 
   const [current, setCurrent] = useState('mail')
@@ -71,7 +71,13 @@ const Header = () => {
   }
 
   return (
-    <Menu onClick={onClick} selectedKeys={[current]} mode="horizontal" items={items} />
+    <Menu
+      style={{ backgroundColor: '#fef7f7ff', color: 'white', fontSize: '16px', width: "calc(100vw - 80px)" }}
+      onClick={onClick}
+      selectedKeys={[current]}
+      mode="horizontal"
+      items={items}
+    />
   )
 }
 

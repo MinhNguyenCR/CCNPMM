@@ -1,5 +1,6 @@
 import myAvatar from './image/My avatar.jpg'
 import './App.css';
+import {Button} from 'buoi7/dist/index.js'
 
 function App() {
 
@@ -16,6 +17,7 @@ function App() {
       <div className="info">
         <h2>Nguyễn Đức Minh</h2>
         <p>Tuổi: 20</p>
+        <Button />
       </div>
     );
   }

@@ -27,7 +27,7 @@ const RegisterPage = () => {
   }
 
   return (
-    <div style={{ minHeight: 'calc(100vh - 80px)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+    <div style={{ minWidth: 'calc(100vw - 80px)',minHeight: 'calc(100vh - 80px)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
       <Row justify="center" style={{ width: '100%' }}>
         <Col xs={22} sm={18} md={12} lg={8}>
           <fieldset style={{ padding: '15px', margin: '15px', border: '1px solid #ccc', borderRadius: '5px' }}>

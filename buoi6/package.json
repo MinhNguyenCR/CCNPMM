@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "buoi7": "^1.0.2",
     "framer-motion": "^12.23.12",
     "lucide-react": "^0.543.0"
   }

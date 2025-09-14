@@ -1,6 +1,6 @@
 // file configdb.ts
 import { Sequelize } from "sequelize";
-const sequelize =new Sequelize('database_development','root','Minhnhi123',{
+const sequelize =new Sequelize('buoi2cnpmm','root','123456',{
     host :'localhost',
     dialect: 'mysql',
     logging: false

@@ -44,14 +44,6 @@ const HomePage = () => {
     // Simulate API call hoặc sử dụng API thật của bạn
     const fetchFeaturedProducts = async () => {
       try {
-        // Uncomment dòng dưới để sử dụng API thật
-        // const response = await fetch('http://localhost:8080/v1/api/products/featured?limit=8');
-        // const data = await response.json();
-        // if (data.EC === 0) {
-        //   setFeaturedProducts(data.DT.products);
-        // }
-        
-        // Mock loading time
         await new Promise(resolve => setTimeout(resolve, 1500));
         setFeaturedProducts(mockProducts);
       } catch (error) {

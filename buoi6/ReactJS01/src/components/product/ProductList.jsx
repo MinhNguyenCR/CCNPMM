@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import ProductCard from "./ProductCard";
 import LoadingSpinner from "../common/LoadingSpinner";
 import "./ProductList.css";
+import {InputText} from "buoi7"
 
 
 const ProductList = ({
@@ -127,7 +128,7 @@ const ProductList = ({
     const handleScroll = () => {
       if (
         window.innerHeight + document.documentElement.scrollTop >=
-        document.documentElement.offsetHeight - 1000
+        document.documentElement.offsetHeight - 5000
       ) {
         loadMore();
       }
@@ -253,6 +254,7 @@ const ProductList = ({
           <p>Đã hiển thị tất cả sản phẩm</p>
         </div>
       )}
+      <InputText />
     </div>
   );
 };
